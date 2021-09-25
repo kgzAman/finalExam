@@ -31,11 +31,13 @@ public class PlaceService {
             place.setDescription(description);
             place.setComment(new ArrayList<>());
             place.setPhotos(new ArrayList<>());
+            place.setCounter(0.0);
             try {
                 place.setMainPhotoPath(maltyPartFile.uploadFile(uploadPath,file));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            placeRepository.save(place);
         }
     }
 }

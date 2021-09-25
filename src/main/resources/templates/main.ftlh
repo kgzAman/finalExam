@@ -42,13 +42,25 @@
         </div>
     </div>
 </nav>
+
     <div class="row row-cols-1 row-cols-md-3 g-4" style="display: flex; flex-wrap: wrap" >
+        <#list places as place>
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <img class="card-img-top" src="${place.mainPhotoPath}" alt="Card image cap">
             <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">${place.nameOfPlace}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${place.counter}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${place.comment.size()}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${place.photos.size()}</p>
             </div>
         </div>
+        </#list>
     </div>
 </body>
 </html>
