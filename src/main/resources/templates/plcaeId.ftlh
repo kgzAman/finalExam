@@ -21,5 +21,51 @@
     </div>
 </nav>
 
+<div class="body" style="margin: 40px">
+    <div class="photo-title" style="width: 100%">
+        <div class="title" style="width: 50%;height: auto">
+            <h2>${place.nameOfPlace}</h2>
+            ${place.description}
+        </div>
+        <div class="title" style="width: 50%;height: auto;border-bottom: 1px solid black">
+            <h2>${place.mainPhotoPath}</h2>
+        </div>
+
+        <#list place.photos as photo>
+            <img src="/img/${photo.photoNamePath}" class="img-thumbnail" style="height: 150px;width: auto; border-bottom: 1px solid black; padding: 10px">
+        </#list>
+
+        <div class="reat" style="border: 1px solid black; margin: 20px">
+            Rating ${place.counter}
+        </div>
+
+        <#list place.comment as comment>
+            <p> On ${comment.createdDate},
+                ${comment.user.name} said
+            </p> <hr>
+            ${comment.context}
+        </#list>
+    </div>
+    Add review
+    <div class="add-rewiev" style="border: 1px solid black">
+        <form action="/place/addComment/${place.id}">
+            <label for="w3review"></label>
+            <textarea id="w3review" name="contex" rows="4" cols="50"></textarea><hr>
+            <div class="rating" style="display: flex">
+                Rating <input type="number" id="tentacles" name="tentacles"
+                              min="1" max="10">
+                <button style="margin-left: auto" type="submit">Submit comment</button>
+            </div>
+        </form>
+    </div>
+    <div class="newPhoto">
+        <h3> Upload new photo</h3><hr>
+        <form action="/place/addPhoto">
+
+        </form>
+
+    </div>
+</div>
+
 </body>
 </html>

@@ -38,9 +38,11 @@ public class PlaceController {
     }
 
     @GetMapping(value = "/{id}")
-    public String getPlace(@PathVariable Long id, Model model){
+    public String getPlace(@PathVariable Long id, Model model,Principal principal){
        Place place= placeService.getPlaceById(id);
+       model.addAttribute("principal",principal);
        model.addAttribute("place",place);
        return "plcaeId";
     }
+
 }
