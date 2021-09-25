@@ -10,5 +10,5 @@ public class Place extends BaseEntity {
 
     private List<String> comment;
 
-    private Double reiting
+    private Double
 }
