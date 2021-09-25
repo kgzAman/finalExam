@@ -19,17 +19,22 @@ public class SecurityController {
     String signIn() {
         return "login";
     }
-    @GetMapping("/login")
-    public String loginPage(@RequestParam(required = false, defaultValue = "false") Boolean error, Model model) {
-        model.addAttribute("error", error);
-        if(error){
-            return "redirect:/register";}
-        return "login";
-    }
-    @PostMapping("/register")
-    public String signUp(@RequestParam String password,@RequestParam String name,@RequestParam String surname,@RequestParam String email) {
-        userService.createUser(password,name,surname,email);
 
+
+    @GetMapping("/error")
+    public String errorPage() {
+
+        return "error";
+    }
+
+    @GetMapping("/register")
+    public String signUp() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String signUp(@RequestParam String email,@RequestParam String password,@RequestParam String name,@RequestParam String surname) {
+        userService.createUser(email,password,name,surname);
         return "redirect:/main";
     }
 }

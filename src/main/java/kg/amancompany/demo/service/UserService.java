@@ -15,7 +15,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void createUser(String password,String email,String name, String surname) {
+    public void createUser(String email,String password,String name, String surname) {
         if(userRepository.findByEmail(email).isPresent()){
             throw new UserAlreadyRegisteredException(); }
         User user= new User();
