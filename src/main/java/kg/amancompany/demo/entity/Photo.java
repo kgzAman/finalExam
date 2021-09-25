@@ -18,4 +18,6 @@ import javax.persistence.*;
 public class Photo extends BaseEntity{
 
     private String photoNamePath;
+
+
 }

@@ -35,7 +35,7 @@ public class Place extends BaseEntity {
     private Double counter;
 
     @Column(name = "photos")
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     private List<Photo> photos;
 
 }

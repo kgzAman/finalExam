@@ -4,60 +4,44 @@
     <meta charset="UTF-8">
     <title>Main Places</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        [data-href] { cursor: pointer; }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex">
+        <a class="navbar-brand" href="#">Cofe Critic</a>
+            <form class="d-flex" style="margin-left: auto">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+        <#if principal??>
+            <p>Hello ${principal.getName()}</p>
+            <a href="/place/create"> Add new place</a>
+        </#if>
         </div>
     </div>
 </nav>
+<div class="tit" style="margin: 20px">
+    <h1 style="text-align: center"> All Places</h1>
+</div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="display: flex; flex-wrap: wrap" >
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="display: flex; flex-wrap: wrap; padding-left: 1rem" >
         <#list places as place>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="${place.mainPhotoPath}" alt="Card image cap">
-            <div class="card-body">
+        <div class="card" style="width: 18rem;" data-href onclick="window.location='/place/${place.id}'">
+            <img class="card-img-top" src="/img/${place.mainPhotoPath}" alt="Card image cap">
+            <div class="car" style=" padding-left: 1rem">
                 <p class="card-text">${place.nameOfPlace}</p>
             </div>
-            <div class="card-body">
+            <div class="car" style=" padding-left: 1rem">
                 <p class="card-text">${place.counter}</p>
             </div>
-            <div class="card-body">
-                <p class="card-text">${place.comment.size()}</p>
+            <div class="car" style=" padding-left: 1rem">
+                <p class="card-text">${place.getComment()?size}</p>
             </div>
-            <div class="card-body">
-                <p class="card-text">${place.photos.size()}</p>
+            <div class="car" style=" padding-left: 1rem">
+                <p class="card-text">${place.getPhotos()?size}</p>
             </div>
         </div>
         </#list>

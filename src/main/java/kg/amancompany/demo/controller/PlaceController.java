@@ -1,14 +1,15 @@
 package kg.amancompany.demo.controller;
 
+import kg.amancompany.demo.entity.Place;
 import kg.amancompany.demo.service.PlaceService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.security.Principal;
 
 
 @Controller
@@ -25,7 +26,8 @@ public class PlaceController {
     }
 
     @GetMapping(value = "/create")
-    public String create(){
+    public String create(Principal principal,Model model){
+        model.addAttribute("principal",principal);
         return "place";
     }
 
@@ -33,5 +35,12 @@ public class PlaceController {
     public String createPlace(@RequestParam MultipartFile file,@RequestParam String nameOfPlace,@RequestParam String description) {
         placeService.createPlace(file,nameOfPlace,description);
         return "redirect:/main";
+    }
+
+    @GetMapping(value = "/{id}")
+    public String getPlace(@PathVariable Long id, Model model){
+       Place place= placeService.getPlaceById(id);
+       model.addAttribute("place",place);
+       return "plcaeId";
     }
 }
