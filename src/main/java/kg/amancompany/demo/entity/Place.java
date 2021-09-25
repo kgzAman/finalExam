@@ -1,11 +1,10 @@
 package kg.amancompany.demo.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -22,6 +21,9 @@ public class Place extends BaseEntity {
     @Column(name = "name_of_place")
     private String nameOfPlace;
 
+    @Column(name = "main_photo_path")
+    private String mainPhotoPath;
+
     @Column(name = "description_of_place")
     private String description;
 
@@ -31,4 +33,9 @@ public class Place extends BaseEntity {
 
     @Column(name = "counter")
     private Double counter;
+
+    @Column(name = "photos")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Photo> photos;
+
 }
