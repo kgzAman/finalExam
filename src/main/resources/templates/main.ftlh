@@ -12,13 +12,20 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Cofe Critic</a>
+        <#if principal??>
             <form class="d-flex" style="margin-left: auto">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-        <#if principal??>
             <p>Hello ${principal.getName()}</p>
             <a href="/place/create"> Add new place</a>
+            <form action="/logout">
+                <button type="submit">logout</button>
+            </form>
+            <#else>
+                <form action="/login">
+                    <button type="submit">login</button>
+                </form>
         </#if>
         </div>
     </div>

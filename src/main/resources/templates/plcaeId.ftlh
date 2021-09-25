@@ -22,15 +22,13 @@
 </nav>
 
 <div class="body" style="margin: 40px">
-    <div class="photo-title"  style="width: 100%;">
+    <div class="photo-title"  style="width: 100%;height: 400px">
         <div style="display: flex">
             <div class="title" style=";width: 50%;height: auto;">
                 <h2>${place.nameOfPlace}</h2>
                 ${place.description}
             </div>
-            <div class="title" style="width: 50%;height: auto;border-bottom: 1px solid black">
-                <img src="/img/${place.mainPhotoPath}">
-            </div>
+                <img src="/img/${place.mainPhotoPath}" style="height: 300px;width: auto; margin-left:auto">
         </div>
     </div>
     <div>
@@ -49,10 +47,11 @@
             ${comment.context}
         </#list>
     </div>
+
+    <#if principal??>
+    <div class="add-rewiev" style="border-bottom: 1px solid black; margin-top:50px">
     Add review
-    <div class="add-rewiev" style="border-bottom: 1px solid black">
         <form action="/place/addComment/${place.id}" method="post">
-            <input type="text" name="id" hidden>
             <label for="w3review"></label>
             <textarea id="w3review" name="text" rows="4" cols="50"></textarea><hr>
             <div class="rating" style="display: flex">
@@ -74,6 +73,7 @@
                 <button type="submit">Upload</button>
             </form>
     </div>
+    </#if>
 </div>
 
 </body>
