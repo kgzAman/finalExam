@@ -1,5 +1,6 @@
 package kg.amancompany.demo.controller;
 
+import kg.amancompany.demo.entity.Comment;
 import kg.amancompany.demo.entity.Place;
 import kg.amancompany.demo.service.PlaceService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.time.LocalDate;
 
 
 @Controller
@@ -43,6 +45,17 @@ public class PlaceController {
        model.addAttribute("principal",principal);
        model.addAttribute("place",place);
        return "plcaeId";
+    }
+
+    @PostMapping(value = "/addComment")
+    public String addComment(@RequestParam Long id,@RequestParam String text,String email){
+        placeService.addComment(id,text,email);
+        return "redirect:/place/"+id;
+    }
+    @PostMapping(value = "/addPhoto/{id}")
+    public String addPhoto(@PathVariable Long id,@RequestParam MultipartFile file,Principal principal){
+        placeService.addPhoto(id,file,principal);
+        return "redirect:/place/"+id;
     }
 
 }
