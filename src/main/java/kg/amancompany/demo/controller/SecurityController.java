@@ -1,23 +1,19 @@
 package kg.amancompany.demo.controller;
 
-import kg.amancompany.demo.entity.User;
 import kg.amancompany.demo.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.Valid;
 
 @Controller
 @Data
 @RequestMapping("/")
 @AllArgsConstructor
 public class SecurityController {
+
+    private final UserService userService;
 
     @GetMapping("/login")
     String signIn() {
@@ -31,20 +27,9 @@ public class SecurityController {
         return "login";
     }
     @PostMapping("/register")
-    String signUp(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
-                  RedirectAttributes attributes) {
+    public String signUp(@RequestParam String password,@RequestParam String name,@RequestParam String surname,@RequestParam String email) {
+        userService.createUser(password,name,surname,email);
 
-        attributes.addFlashAttribute("user", user);
-        if (bindingResult.hasFieldErrors()) {
-            attributes.addFlashAttribute("errors", bindingResult.getFieldErrors());
-            return "login/sign-up";
-        }
-
-        User savedUsed = UserService.signUpUser(user);
-
-
-        return "redirect:/employees/management" + savedUsed.getId();
+        return "redirect:/main";
     }
-}
-
 }

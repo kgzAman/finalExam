@@ -1,8 +1,8 @@
-package com.ihsm.esdp.users.exceptions;
+package kg.amancompany.demo.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.CONFLICT)
-public class UserAlreadyRegisteredException extends RuntimeException{
+public class UserAlreadyRegisteredException extends RuntimeException {
 }

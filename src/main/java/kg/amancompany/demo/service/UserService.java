@@ -1,40 +1,28 @@
 package kg.amancompany.demo.service;
 
 import kg.amancompany.demo.entity.User;
+import kg.amancompany.demo.exceptions.UserAlreadyRegisteredException;
 import kg.amancompany.demo.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @AllArgsConstructor
 public class UserService {
-
-
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public User signUpUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()).isPresent()){
-            throw new UserAlreadyRegisteredException();
-        }
 
-        final String password = RandomStringUtils.random(8,true,true);
-        final String encryptedPassword = bCryptPasswordEncoder.encode(password);
-
-        user.setPassword(encryptedPassword);
-        user.setEmail(user.getEmail().toLowerCase());
-
-        User userWithId = userRepository.save(user);
-
-        Employee employee = new Employee();
-
-        user.setEmployee(employee);
-
-        employee.setUser(user);
-        employeeRepository.save(employee);
-
-        sendConfirmationMail(user.getEmail(),password);
-        return userWithId;
+    public void createUser(String password,String email,String name, String surname) {
+        if(userRepository.findByEmail(email).isPresent()){
+            throw new UserAlreadyRegisteredException(); }
+        User user= new User();
+        user.setEmail(email);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
     }
-
 }
